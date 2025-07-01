@@ -30,6 +30,7 @@ const Timer: React.FC<TimerProps> = ({ resetTrigger }) => {
         background: "#222",
         color: "#fff",
         borderRadius: "0.5rem",
+        borderColor:"#063970",
         padding: "0.4rem 1.2rem",
         fontWeight: "bold",
         fontSize: "1rem",
@@ -38,7 +39,7 @@ const Timer: React.FC<TimerProps> = ({ resetTrigger }) => {
         display: "inline-block",
         minWidth: "70px",
         textAlign: "center",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+        boxShadow: "0 2px 8px rgb(255, 128, 0)",
       }}
     >
       {mins}:{secs}
