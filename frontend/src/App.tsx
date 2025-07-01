@@ -1,6 +1,7 @@
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import { useRef, useState } from "react";
+import PlayerInfo from "./components/PlayerInfo"; 
 
 function App() {
   const chessRef = useRef(new Chess());
@@ -37,6 +38,8 @@ function App() {
     >
       <h1 style={{ fontSize: "2.5rem", marginBottom: "1.5rem" }}>AlgoChess</h1>
 
+      <PlayerInfo name="Black" color="black" />
+
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Chessboard
           position={fen}
@@ -44,6 +47,8 @@ function App() {
           boardWidth={Math.min(window.innerWidth * 0.9, 500)}
         />
       </div>
+
+      <PlayerInfo name="White" color="white" />
 
       <div style={{ marginTop: "1.5rem", fontSize: "1.2rem", textAlign: "center" }}>
         <p>Status: {chessRef.current.isGameOver() ? "Game Over" : "In Progress"}</p>
