@@ -26,24 +26,26 @@ function App() {
     <div
       style={{
         display: "flex",
+        flexDirection: "column",
         height: "100vh",
         width: "100vw",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
         backgroundColor: "#1e1e1e",
         color: "white",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>AlgoChess</h1>
+      <h1 style={{ fontSize: "2.5rem", marginBottom: "1.5rem" }}>AlgoChess</h1>
 
-      <Chessboard
-        position={fen}
-        onPieceDrop={onDrop}
-        boardWidth={Math.min(window.innerWidth * 0.9, 500)}
-      />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Chessboard
+          position={fen}
+          onPieceDrop={onDrop}
+          boardWidth={Math.min(window.innerWidth * 0.9, 500)}
+        />
+      </div>
 
-      <div style={{ marginTop: "1rem", fontSize: "1.2rem" }}>
+      <div style={{ marginTop: "1.5rem", fontSize: "1.2rem", textAlign: "center" }}>
         <p>Status: {chessRef.current.isGameOver() ? "Game Over" : "In Progress"}</p>
       </div>
     </div>
