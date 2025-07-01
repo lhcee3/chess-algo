@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 interface TimerProps {
-  resetTrigger: number; // Change this value to reset the timer
+  resetTrigger: number;
 }
 
 const Timer: React.FC<TimerProps> = ({ resetTrigger }) => {
@@ -9,7 +9,7 @@ const Timer: React.FC<TimerProps> = ({ resetTrigger }) => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    setSeconds(0); // Reset timer when resetTrigger changes
+    setSeconds(0);
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setSeconds((s) => s + 1);
@@ -19,31 +19,16 @@ const Timer: React.FC<TimerProps> = ({ resetTrigger }) => {
     };
   }, [resetTrigger]);
 
-  const mins = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2, "0");
+  const mins = Math.floor(seconds / 60).toString().padStart(2, "0");
   const secs = (seconds % 60).toString().padStart(2, "0");
 
   return (
-    <span
-      style={{
-        background: "#222",
-        color: "#fff",
-        borderRadius: "0.5rem",
-        borderColor:"#063970",
-        padding: "0.4rem 1.2rem",
-        fontWeight: "bold",
-        fontSize: "1rem",
-        marginRight: "1rem",
-        letterSpacing: "1px",
-        display: "inline-block",
-        minWidth: "70px",
-        textAlign: "center",
-        boxShadow: "0 2px 8px rgb(255, 128, 0)",
-      }}
-    >
-      {mins}:{secs}
-    </span>
+    <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-lg px-4 py-2 font-mono text-lg font-bold shadow-lg border border-slate-600">
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+        <span className="tracking-wider">{mins}:{secs}</span>
+      </div>
+    </div>
   );
 };
 

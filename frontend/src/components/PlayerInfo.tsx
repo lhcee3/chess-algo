@@ -7,23 +7,27 @@ interface PlayerInfoProps {
 }
 
 const PlayerInfo: React.FC<PlayerInfoProps> = ({ name, color, active }) => (
-  <div
-    style={{
-      width: Math.min(window.innerWidth * 0.9, 500),
-      textAlign: "center",
-      margin: color === "black" ? "0 0 0.5rem 0" : "0.5rem 0 0 0",
-      fontWeight: "bold",
-      fontSize: "1.1rem",
-      color: color === "white" ? "#fff" : "#222",
-      background: color === "white" ? "#b58863" : "#f0d9b5",
-      borderRadius: "0.5rem",
-      padding: "0.3rem 0",
-      border: active ? "3px solid rgb(255, 255, 255)" : "none", 
-      boxShadow: active ? "0 0 10px 10px #ff9800" : "none",
-      transition: "border 0.2s, box-shadow 0.2s",
-    }}
-  >
-    {name}
+  <div className={`
+    w-full max-w-md mx-auto text-center py-4 px-6 rounded-xl font-semibold text-lg
+    transition-all duration-300 transform
+    ${color === "white" 
+      ? "bg-gradient-to-r from-amber-50 to-amber-100 text-amber-900 border-2 border-amber-200" 
+      : "bg-gradient-to-r from-slate-700 to-slate-800 text-white border-2 border-slate-600"
+    }
+    ${active 
+      ? "ring-4 ring-blue-400 ring-opacity-75 shadow-lg scale-105 animate-pulse" 
+      : "shadow-md hover:shadow-lg"
+    }
+  `}>
+    <div className="flex items-center justify-center gap-3">
+      <div className={`w-3 h-3 rounded-full ${
+        color === "white" ? "bg-white border-2 border-amber-800" : "bg-slate-900 border-2 border-white"
+      }`}></div>
+      <span>{name}</span>
+      {active && (
+        <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+      )}
+    </div>
   </div>
 );
 
