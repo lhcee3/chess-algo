@@ -2,12 +2,14 @@ import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import { useRef, useState } from "react";
 import PlayerInfo from "./components/PlayerInfo";
-import ResetButton from "./components/ResetButton"; // <-- Import
+import ResetButton from "./components/ResetButton";
+import Timer from "./components/Timer"; // <-- Import
 
 function App() {
   const chessRef = useRef(new Chess());
   const [fen, setFen] = useState(chessRef.current.fen());
   const [pgn, setPgn] = useState(chessRef.current.pgn());
+  const [resetCount, setResetCount] = useState(0); // For timer reset
 
   function onDrop(source: string, target: string) {
     const game = chessRef.current;
@@ -29,6 +31,7 @@ function App() {
     chessRef.current.reset();
     setFen(chessRef.current.fen());
     setPgn(chessRef.current.pgn());
+    setResetCount((c) => c + 1); // Reset timer
   }
 
   // Determine whose turn it is
@@ -37,7 +40,7 @@ function App() {
   return (
     <div
       style={{
-        position: "relative", // Add this
+        position: "relative",
         display: "flex",
         flexDirection: "column",
         height: "100vh",
@@ -48,8 +51,9 @@ function App() {
         justifyContent: "center",
       }}
     >
-      {/* Reset Button in top right */}
-      <div style={{ position: "absolute", top: 24, right: 32, zIndex: 10 }}>
+      {/* Top right controls */}
+      <div style={{ position: "absolute", top: 24, right: 32, zIndex: 10, display: "flex", alignItems: "center" }}>
+        <Timer resetTrigger={resetCount} />
         <ResetButton onReset={handleReset} />
       </div>
 
