@@ -1,7 +1,8 @@
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import { useRef, useState } from "react";
-import PlayerInfo from "./components/PlayerInfo"; 
+import PlayerInfo from "./components/PlayerInfo";
+import ResetButton from "./components/ResetButton"; // <-- Import
 
 function App() {
   const chessRef = useRef(new Chess());
@@ -23,12 +24,20 @@ function App() {
     return true;
   }
 
+  // Reset game handler
+  function handleReset() {
+    chessRef.current.reset();
+    setFen(chessRef.current.fen());
+    setPgn(chessRef.current.pgn());
+  }
+
   // Determine whose turn it is
   const turn = chessRef.current.turn(); // 'w' or 'b'
 
   return (
     <div
       style={{
+        position: "relative", // Add this
         display: "flex",
         flexDirection: "column",
         height: "100vh",
@@ -39,6 +48,11 @@ function App() {
         justifyContent: "center",
       }}
     >
+      {/* Reset Button in top right */}
+      <div style={{ position: "absolute", top: 24, right: 32, zIndex: 10 }}>
+        <ResetButton onReset={handleReset} />
+      </div>
+
       <h1 style={{ fontSize: "2.5rem", marginBottom: "1.5rem" }}>AlgoChess</h1>
 
       <PlayerInfo name="Black" color="black" active={turn === "b"} />
