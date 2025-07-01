@@ -23,6 +23,9 @@ function App() {
     return true;
   }
 
+  // Determine whose turn it is
+  const turn = chessRef.current.turn(); // 'w' or 'b'
+
   return (
     <div
       style={{
@@ -38,7 +41,7 @@ function App() {
     >
       <h1 style={{ fontSize: "2.5rem", marginBottom: "1.5rem" }}>AlgoChess</h1>
 
-      <PlayerInfo name="Black" color="black" />
+      <PlayerInfo name="Black" color="black" active={turn === "b"} />
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Chessboard
@@ -48,7 +51,7 @@ function App() {
         />
       </div>
 
-      <PlayerInfo name="White" color="white" />
+      <PlayerInfo name="White" color="white" active={turn === "w"} />
 
       <div style={{ marginTop: "1.5rem", fontSize: "1.2rem", textAlign: "center" }}>
         <p>Status: {chessRef.current.isGameOver() ? "Game Over" : "In Progress"}</p>

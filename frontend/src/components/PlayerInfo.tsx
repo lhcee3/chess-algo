@@ -3,9 +3,10 @@ import React from "react";
 interface PlayerInfoProps {
   name: string;
   color: "white" | "black";
+  active?: boolean;
 }
 
-const PlayerInfo: React.FC<PlayerInfoProps> = ({ name, color }) => (
+const PlayerInfo: React.FC<PlayerInfoProps> = ({ name, color, active }) => (
   <div
     style={{
       width: Math.min(window.innerWidth * 0.9, 500),
@@ -17,6 +18,9 @@ const PlayerInfo: React.FC<PlayerInfoProps> = ({ name, color }) => (
       background: color === "white" ? "#b58863" : "#f0d9b5",
       borderRadius: "0.5rem",
       padding: "0.3rem 0",
+      border: active ? "3px solid rgb(255, 152, 0)" : "none", // Fixed border color
+      boxShadow: active ? "0 0 10px 2px #ff9800" : "none",
+      transition: "border 0.2s, box-shadow 0.2s",
     }}
   >
     {name}
